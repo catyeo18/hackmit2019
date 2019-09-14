@@ -25,6 +25,10 @@ def get_sentiment(emoji):
 		return "Neutral"
 	else:
 		return "Negative"
+
+def get_emoji_name(emoji):
+	row_data = df.loc[emoji]
+	return row_data['Emoji_Name']
 	
 #################################
 ########## TESTING ##############
@@ -35,4 +39,11 @@ def test_get_sentiment():
 	for emoji, data in df.iterrows():
 		print(emoji)
 		print (get_sentiment(emoji))
+
+# Test get_sentiment
+def test_get_emoji_name():
+	for emoji, data in df.iterrows():
+		print(emoji)
+		print (get_emoji_name(emoji))
 	
+test_get_emoji_name()
