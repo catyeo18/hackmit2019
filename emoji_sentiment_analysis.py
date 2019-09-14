@@ -21,11 +21,11 @@ def get_sentiment(emoji):
 	percent_max = max(percent_pos, percent_neutral, percent_neg)
 
 	if percent_max == percent_pos:
-		return "Positive"
+		return "POSITIVE"
 	elif percent_max == percent_neutral:
-		return "Neutral"
+		return "NEUTRAL"
 	else:
-		return "Negative"
+		return "NEGATIVE"
 
 # Input: emoji
 # Output: full name
@@ -47,14 +47,27 @@ def get_emotion(emoji):
 		name = get_emoji_name(emoji).split()
 		for word in name:
 			if word in HAPPY:
-				return "Happy"
+				return "HAPPY"
 			if word in SAD:
-				return "Sad"
+				return "SAD"
 			if word in ANGRY:
-				return "Angry"
+				return "ANGRY"
 
 	return get_sentiment(emoji)
-	
+
+# Output: keywords (exclude filler words like 'face', 'of', 'and') + sentiment
+def get_keywords(emoji):
+	row_data = df.loc[emoji]
+	name = get_emoji_name(emoji).split()
+	keywords = set()
+	keywords.add(get_emotion(emoji))
+	fillers = ['AND', 'BUT', 'FACE', 'OF', 'WITH', 'SYMBOL', 'HEAVY', 'A', 'IN']
+	for word in name:
+		if word not in fillers:
+			keywords.add(word)
+
+	return keywords
+
 #################################
 ########## TESTING ##############
 #################################
@@ -77,4 +90,10 @@ def test_get_emotion():
 		print (get_emotion(emoji))
 		print()
 
-test_get_emotion()
+def test_get_keywords():
+	for emoji, data in islice(df.iterrows(), 25):
+		print(emoji)
+		print (get_keywords(emoji))
+		print()
+
+test_get_keywords()
