@@ -91,9 +91,9 @@ def test_get_emotion():
 		print()
 
 def test_get_keywords():
-	for emoji, data in islice(df.iterrows(), 25):
+	for emoji, data in islice(df.iterrows(), 125):
 		print(emoji)
 		print (get_keywords(emoji))
 		print()
 
-test_get_keywords()
+# test_get_keywords()

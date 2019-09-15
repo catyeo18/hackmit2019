@@ -1,16 +1,28 @@
 import requests 
 from bs4 import BeautifulSoup 
-import json
+import csv 
+import random
   
-url = 'https://www.youtube.com/playlist?list=RDCLAK5uy_ktU_MiPyxsoBpl68TuShAvg-ZCArB772M'
-data = requests.get(url)
-# print(data)
-  
-soup = BeautifulSoup(data.content, 'html.parser') 
-for itemName in soup.find_all("tr", attrs={'class':"pl-video yt-uix-tile "}):
-	print(itemName["data-title"])
-	print(itemName["data-video-id"])
-  
-# print(content)
+def return_playlist():
+	return 
 
-videoID=[]  
+
+
+# Input: Youtube Playlist URL
+def return_track(emotion):
+	URL = "https://youtube.com/playlist?list=RDCLAK5uy_kJWGcrtTC_zrbD6rKkBvOcht_vzijhX1A"
+	r = requests.get(URL) 
+	soup = BeautifulSoup(r.content, 'html.parser') 
+	# print(soup)
+	  
+	urls=[]  
+
+	# print(soup.findAll('tr', attrs = {'class':'pl-video yt-uix-tile'}))
+
+	for row in soup.findAll('tr', attrs = {'class':'pl-video yt-uix-tile '}):
+	    urls.append(row["data-video-id"])
+
+	part = random.choice(urls)
+	url = "https://www.youtube.com/watch?v=" + part
+
+	return(url)
