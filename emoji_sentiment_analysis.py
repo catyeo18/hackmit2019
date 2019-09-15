@@ -3,7 +3,7 @@ import numpy as np
 from itertools import islice
 
 # Import data, field set as Emoji 
-df = pd.read_csv('Emoji_Sentiment_Data_1.csv', index_col='Emoji')
+df = pd.read_csv('Emoji_Sentiment_Data_1.csv', index_col='Unicode')
 # print (df.loc['1F602'])
 
 #################################

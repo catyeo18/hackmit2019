@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 # from itertools import islice
 from flask import Flask, render_template, request
+from flask_json import FlaskJSON, JsonError, json_response, as_json
 from selenium import webdriver
 import requests
 from bs4 import BeautifulSoup
@@ -11,6 +12,7 @@ from emoji_sentiment_analysis import get_emotion, get_keywords
 from scrape_youtube_music import return_track 
 
 app = Flask(__name__)
+json = FlaskJSON(app)
 
 # url = "https://youtube.com/playlist?list=RDCLAK5uy_kJWGcrtTC_zrbD6rKkBvOcht_vzijhX1A"
 
@@ -18,7 +20,8 @@ app = Flask(__name__)
 def emoji_to_track(emoji):
 	emotion = get_emotion(emoji)
 	url = return_track(emotion)
-	return render_template("results.html", emoji=emoji, url=url)
+	return json_response(url=url)
+	# return render_template("results.html", emoji=emoji, url=url)
 
 
 # @app.route("/form", methods=["POST"])
