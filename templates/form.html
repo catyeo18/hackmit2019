@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+    <!-- <div class="jumbotron text-center banner">
+        <h1><b>Emoji to Music</b></h1>
+        <p> Created by:  </p>
+    </div>
+
+    <h4 class="mb-3">To provide you the best restaurant recommendations, please enter the following information below.</h4> -->
+
+    <form action="/form" method="post">
+        <h5>Emoji:</h5>
+        <input type="text" class="form-control" name="emoji" placeholder="Emoji"><br>
+        
+        <button class="btn btn-color" type="submit">Submit</button>
+
+    </form>
+
+{% endblock %}

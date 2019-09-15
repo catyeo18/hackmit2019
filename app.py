@@ -8,22 +8,18 @@ from bs4 import BeautifulSoup
 import json
 
 from emoji_sentiment_analysis import get_keywords
+from scrape_youtube_music import return_track 
 
 app = Flask(__name__)
 
-url = ''
+url = "https://youtube.com/playlist?list=RDCLAK5uy_kJWGcrtTC_zrbD6rKkBvOcht_vzijhX1A"
+# url1 = return_track()
+# print(url1)
 
-@app.route("/", methods=["GET"])
-def hello():
-  return "Hello World"
+@app.route("/<emoji>")
+def emoji_to_track(emoji):
+    return render_template("results.html", emoji=emoji, url=url)
 
-@app.route("/form", methods=["POST"])
-def bye():
-  return "Bye World!"
-
-# @app.route("/", methods=["GET"])
-# def get_form():
-#     return render_template("form.html")
 
 # @app.route("/form", methods=["POST"])
 # def post_form():
