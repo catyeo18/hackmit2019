@@ -1,0 +1,57 @@
+var EMOJI = '';
+var SONG_LINK = 'Insert Song Link Here';
+
+const toUni = function (str) {
+	if (str.length < 4)
+		return str.codePointAt(0).toString(16);
+	unicode = str.codePointAt(0).toString(16) + '-' + str.codePointAt(2).toString(16);
+	return unicode;
+};
+
+function bot1handler (options, event, context, callback) {
+    options.next_state = 'user1';
+    context.console.log(event.message)
+    EMOJI = toUni(event.message).toUpperCase()
+    
+    // context.console.log("=======================")
+    callback (options, event, context);
+}
+
+function user1handler (options, event, context, callback) {
+    options.next_state = 'bot2';
+    site_link = "https://30b8000d.ngrok.io/" + EMOJI;
+    SONG_LINK = site_link
+    
+    context.simplehttp.makeGet (site_link, {}, function (context, event) {
+        var res = JSON.parse(event.getresp);
+        SONG_LINK = res.url
+        options.data.resp = SONG_LINK;
+        callback(options, event, context);
+    });
+	
+	// options.data.resp = SONG_LINK
+	
+ //   callback(options, event, context);
+}
+
+function bot2handler (options, event, context, callback) {
+	site_link = "https://30b8000d.ngrok.io/" + EMOJI;
+    SONG_LINK = site_link
+    
+    context.simplehttp.makeGet (site_link, {}, function (context, event) {
+        var res = JSON.parse(event.getresp);
+        SONG_LINK = res.url
+        options.data.resp = SONG_LINK;
+        callback(options, event, context);
+    });
+    
+    // options.data.resp = SONG_LINK
+	
+    // callback(options, event, context);
+}
+
+module.exports.main = {
+    bot1: bot1handler,
+    user1: user1handler,
+    bot2: bot2handler
+}
