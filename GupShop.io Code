@@ -19,7 +19,7 @@ function bot1handler (options, event, context, callback) {
 
 function user1handler (options, event, context, callback) {
     options.next_state = 'bot2';
-    site_link = "http://emoji.jad.me" + EMOJI;
+    site_link = "http://emoji.jad.me/" + EMOJI;
     SONG_LINK = site_link
     
     context.simplehttp.makeGet (site_link, {}, function (context, event) {
@@ -35,7 +35,7 @@ function user1handler (options, event, context, callback) {
 }
 
 function bot2handler (options, event, context, callback) {
-	site_link = "http://emoji.jad.me" + EMOJI;
+	site_link = "http://emoji.jad.me/" + EMOJI;
     SONG_LINK = site_link
     
     context.simplehttp.makeGet (site_link, {}, function (context, event) {
