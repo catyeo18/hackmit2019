@@ -14,7 +14,9 @@ df = pd.read_csv('Emoji_Sentiment_Data_1.csv', index_col='Unicode')
 # Output: positive/negative/neutral sentiment
 def get_sentiment(emoji):
 	# find max of the pos/neg/neutral percentages
-	row_data = df.loc[emoji]
+	emoji_unicode = str(emoji.encode('unicode-escape'))[8:-1].upper()
+	row_data = df.loc[emoji_unicode]
+	
 	percent_pos = row_data['Percent_Positive']
 	percent_neutral = row_data['Percent_Neutral']
 	percent_neg = row_data['Percent_Negative']
@@ -30,7 +32,8 @@ def get_sentiment(emoji):
 # Input: emoji
 # Output: full name
 def get_emoji_name(emoji):
-	row_data = df.loc[emoji]
+	emoji_unicode = str(emoji.encode('unicode-escape'))[8:-1].upper()
+	row_data = df.loc[emoji_unicode]
 	return row_data['Emoji_Name']
 
 # More advanced than get_sentiment
@@ -40,7 +43,9 @@ SAD = ('SAD', 'TIRED', 'WEARY', 'CRY', 'CRYING', 'PERSEVERING')
 ANGRY = ('ANGRY', 'MAD', 'UPSET', 'UNAMUSED')
 
 def get_emotion(emoji):
-	row_data = df.loc[emoji]
+	emoji_unicode = str(emoji.encode('unicode-escape'))[8:-1].upper()
+	row_data = df.loc[emoji_unicode]
+	print(row_data)
 
 	# if it is an emoticon, further analysis
 	if row_data['Emoji_Type'] == 'Emoticons':
