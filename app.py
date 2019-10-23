@@ -7,6 +7,8 @@ from selenium import webdriver
 import requests
 from bs4 import BeautifulSoup
 import json
+from flask import send_from_directory
+import os
 
 from emoji_sentiment_analysis import get_emotion, get_keywords
 from scrape_youtube_music import return_track 
@@ -23,6 +25,10 @@ def emoji_to_track(emoji):
 	return json_response(url=url)
 	# return render_template("results.html", emoji=emoji, url=url)
 
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'),
+                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 # @app.route("/form", methods=["POST"])
 # def post_form():
